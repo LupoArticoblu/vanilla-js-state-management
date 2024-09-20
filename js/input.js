@@ -5,13 +5,21 @@ class InputHandler{
     window.addEventListener('keydown', function(e){
       switch(e.key){
         case 'ArrowLeft':
-          this.lastKey = 'Press left'
+          this.lastKey = 'Press left';
+          break
+        case 'ArrowRight':
+          this.lastKey = 'Press right'; 
+          break 
       }
     })
-    window.addEventListener('keyup', function(e){
+    window.addEventListener('keyup', e =>{
       switch(e.key){
         case 'ArrowLeft':
-          this.lastKey = 'Relese left'
+          this.lastKey = 'Release left';
+          break
+        case 'ArrowRight':
+          this.lastKey = 'Release right';  
+          break
       }
     })
   }

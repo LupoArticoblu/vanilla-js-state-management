@@ -1,5 +1,6 @@
 import Player from './player.js';
 import InputHandler from './input.js';
+import {drawStatusText} from './utility.js';
 
 
 window.addEventListener('load', function() {
@@ -14,4 +15,13 @@ window.addEventListener('load', function() {
   const input = new InputHandler();
   console.log(player);
   player.draw(ctx);
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    player.draw(ctx);
+    console.log(input.lastKey);
+    drawStatusText(ctx, input);
+    requestAnimationFrame(animate);
+  };
+  animate();
 });
