@@ -16,15 +16,27 @@ class Player{
     this.weight = 0.8;
     this.frameX = 0;
     this.frameY = 0;
+    this.maxFrame = 6;
     this.speed = 0;
     this.maxSpeed = 10;
+    //variabili di supporto a deltaTime
     this.fps = 20;
     this.frameTimer = 0;
     this.frameInterval = 1000/this.fps;
   }
-  draw(context){
+  draw(context, deltaTime){
     //ricordimo gli argomenti da passare in drawImage sono: immagine, sorgente asse X, sorgente asse Y, apice asse X, apice asse Y e destinazione immagine su tela con this.x, this.y, this.width e this.height
-    context.drawImage(this.image, this.width * this.frameX, this.height * this.frameY, this.width, this.height, this.x, this.y, this.width, this.height)
+    context.drawImage(this.image, this.width * this.frameX, this.height * this.frameY, this.width, this.height, this.x, this.y, this.width, this.height);
+    if(this.frameTimer > this.frameInterval){
+      if(this.frameX < this.maxFrame){
+        this.frameX++;
+      }else{
+        this.frameX = 0;
+      }
+      this.frameTimer = 0;
+    }else{
+      this.frameTimer += deltaTime;
+    }
   }
   update(input){
     this.currentState.handleInput(input);

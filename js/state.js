@@ -38,6 +38,7 @@ export class StandingLeft extends State{
   enter(){
     this.player.frameY = 1;
     this.player.speed = 0;
+    this.player.maxFrame = 6;
   }
   /**
    * La funzione handleInput() gestisce l'input dell'utente e decide se cambiare stato
@@ -68,6 +69,7 @@ export class StandingRight extends State{
   enter(){
     this.player.frameY = 0;
     this.player.speed = 0;
+    this.player.maxFrame = 6;
   }
   handleInput(input){
     if(input === 'Press left'){
@@ -89,6 +91,7 @@ export class SittingLeft extends State{
   enter(){
     this.player.frameY = 9;
     this.speed = 0;
+    this.maxFrame = 4;
   }
   handleInput(input){
     if(input === 'Press right'){
@@ -106,6 +109,7 @@ export class SittingRight extends State{
   enter(){
     this.player.frameY = 8;
     this.speed = 0;
+    this.maxFrame = 4;
   }
   handleInput(input){
     if(input === 'Press left'){
@@ -124,6 +128,7 @@ export class RunningLeft extends State{
   enter(){
     this.player.frameY = 7;
     this.player.speed = - this.player.maxSpeed;
+    this.maxFrame = 8;
   }
   handleInput(input){
     // se l'utente preme il tasto destra
@@ -149,6 +154,7 @@ export class RunningRight extends State{
   enter(){
     this.player.frameY = 6;
     this.player.speed = this.player.maxSpeed;
+    this.maxFrame = 8;
   }
   handleInput(input){
     if(input === 'Press left'){
@@ -169,6 +175,7 @@ export class JumpingLeft extends State{
     this.player.frameY = 3;
     if(this.player.onGround()) this.player.vy -= 20;
     this.player.speed = - this.player.maxSpeed * 0.5;
+    this.maxFrame = 6;
   }
   handleInput(input){
     if(input === 'Press right'){
@@ -189,6 +196,7 @@ export class JumpingRight extends State{
     this.player.frameY = 2;
     if(this.player.onGround()) this.player.vy -= 20;
     this.player.speed = this.player.maxSpeed * 0.5;
+    this.maxFrame = 6;
   }
   handleInput(input){
     if(input === 'Press left'){
@@ -207,6 +215,7 @@ export class FallingLeft extends State{
   }
   enter(){
     this.player.frameY = 5;
+    this.maxFrame = 6;
   }
   handleInput(input){
     if(input === 'Press right'){
@@ -223,6 +232,7 @@ export class FallingRight extends State{
   }
   enter(){
     this.player.frameY = 4;
+    this.maxFrame = 6;
   }
   handleInput(input){
     if(input === 'Press left'){

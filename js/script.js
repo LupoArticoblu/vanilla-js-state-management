@@ -21,12 +21,17 @@ window.addEventListener('load', function() {
   // disegnamo il player
   player.draw(ctx);
 
+  let lastTime = 0;
+
   // creiamo la funzione per l'animazione
-  function animate() {
+  function animate(timeStamp) {
+    // calcoliamo il tempo trascorso dall'animazione precedente
+    const deltaTime = timeStamp - lastTime;
+    lastTime = timeStamp;
     // cancelliamo il canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     // disegnamo il player
-    player.draw(ctx);
+    player.draw(ctx, deltaTime);
     // aggiorniamo lo stato del player
     // la funzione update dell'oggetto player aggiorna il suo stato a seconda dell'input ricevuto. Il suo argomento una stringa che indica l'ultima azione dell'utente (es. 'Press left' o 'Release right'), la funzione update dell'oggetto player utilizza l'argomento per cambiare il suo stato ad esempio se l'argomento 'Press left' allora il player si sposta a sinistra
     player.update(input.lastKey);
@@ -36,5 +41,5 @@ window.addEventListener('load', function() {
     requestAnimationFrame(animate);
   };
   // chiamiamo la funzione per l'animazione
-  animate();
+  animate(0);
 });
