@@ -1,10 +1,11 @@
+import{ StandingLeft, StandingRight } from './state.js';
 export default
 class Player{
   constructor(gameWidth, gameHeight){
     this.gameHeight = gameHeight;
     this.gameWidth = gameWidth;
-    this.state = [];
-    this.currentState = this.state[0];
+    this.states = [new StandingLeft(), new StandingRight() ];
+    this.currentState = this.states[0];
     this.image = document.getElementById('dog');
     this.width = 200;
     this.height = 181;
@@ -17,5 +18,12 @@ class Player{
   draw(context){
     //ricordimo gli argomenti da passare in drawImage sono: immagine, sorgente asse X, sorgente asse Y, apice asse X, apice asse Y e destinazione immagine su tela con this.x, this.y, this.width e this.height
     context.drawImage(this.image, this.width * this.frameX, this.height * this.frameY, this.width, this.height, this.x, this.y, this.width, this.height)
+  }
+  update(input){
+    this.currentState.handleInput(input);
+  }
+  setState(state){
+    this.currentState = this.states[state];
+    this.currentState.enter();
   }
 }
