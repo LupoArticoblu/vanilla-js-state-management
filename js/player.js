@@ -27,6 +27,9 @@ class Player{
   update(input){
     this.currentState.handleInput(input);
     this.x += this.speed;
+    //gestione orizzontale
+    if(this.x <= 0) this.x = 0;
+    if(this.x >= this.gameWidth - this.width) this.x = this.gameWidth - this.width;
   }
   setState(state){
     this.currentState = this.states[state];
