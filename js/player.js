@@ -4,8 +4,8 @@ class Player{
   constructor(gameWidth, gameHeight){
     this.gameHeight = gameHeight;
     this.gameWidth = gameWidth;
-    this.states = [new StandingLeft(), new StandingRight() ];
-    this.currentState = this.states[0];
+    this.states = [new StandingLeft(this), new StandingRight(this) ];
+    this.currentState = this.states[1];
     this.image = document.getElementById('dog');
     this.width = 200;
     this.height = 181;
