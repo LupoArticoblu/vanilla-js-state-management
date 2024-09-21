@@ -4,6 +4,8 @@
 export const state ={
   STANDING_LEFT: 0,
   STANDING_RIGHT: 1,
+  SITTING_LEFT: 2,
+  SITTING_RIGHT: 3,
 }
 
 /**
@@ -37,6 +39,8 @@ export class StandingLeft extends State{
   handleInput(input){
     if(input === 'Press right'){
       this.player.setState(state.STANDING_RIGHT);
+    }else if(input === 'Press down'){
+      this.player.setState(state.SITTING_LEFT);
     }
   }
 }
@@ -56,6 +60,41 @@ export class StandingRight extends State{
   handleInput(input){
     if(input === 'Press left'){
       this.player.setState(state.STANDING_LEFT);
+    }else if(input === 'Press down'){
+      this.player.setState(state.SITTING_RIGHT);
     }
   }
+}
+export class SittingLeft extends State{
+  constructor(player){
+    super('SittingLeft');
+    this.player = player;
+  }
+  enter(){
+    this.player.frameY = 9;
+  }
+  handleInput(input){
+    if(input === 'Press right'){
+      this.player.setState(state.SITTING_RIGHT);
+    }else if(input === 'Press up'){
+      this.player.setState(state.STANDING_LEFT);
+    }
+  }
+}
+export class SittingRight extends State{
+  constructor(player){
+    super('SittingRight');
+    this.player = player;
+  }
+  enter(){
+    this.player.frameY = 8;
+  }
+  handleInput(input){
+    if(input === 'Press left'){
+      this.player.setState(state.SITTING_LEFT);
+    }else if(input === 'Press up'){
+      this.player.setState(state.STANDING_RIGHT);
+    }
+  }
+
 }
