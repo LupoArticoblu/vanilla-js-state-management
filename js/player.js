@@ -1,10 +1,10 @@
-import{ StandingLeft, StandingRight, SittingLeft, SittingRight, RunningLeft, RunningRight } from './state.js';
+import{ StandingLeft, StandingRight, SittingLeft, SittingRight, RunningLeft, RunningRight, JumpingLeft, JumpingRight } from './state.js';
 export default
 class Player{
   constructor(gameWidth, gameHeight){
     this.gameHeight = gameHeight;
     this.gameWidth = gameWidth;
-    this.states = [new StandingLeft(this), new StandingRight(this), new SittingLeft(this), new SittingRight(this), new RunningLeft(this), new RunningRight(this)];
+    this.states = [new StandingLeft(this), new StandingRight(this), new SittingLeft(this), new SittingRight(this), new RunningLeft(this), new RunningRight(this), new JumpingLeft(this), new JumpingRight(this)];
     this.currentState = this.states[1];
     this.image = document.getElementById('dog');
     this.width = 200;
@@ -12,6 +12,8 @@ class Player{
     //posizioniamo il player al centro in basso
     this.x = this.gameWidth/2 - this.width/2;
     this.y = this.gameHeight - this.height;
+    this.vy = 0;
+    this.weight = 0.8;
     this.frameX = 0;
     this.frameY = 0;
     this.speed = 0;
@@ -30,9 +32,20 @@ class Player{
     //gestione orizzontale
     if(this.x <= 0) this.x = 0;
     if(this.x >= this.gameWidth - this.width) this.x = this.gameWidth - this.width;
+    //gestione verticale
+    this.y += this.vy;
+    if(!this.onGround()){
+      this.vy += this.weight;
+    }else{
+      this.vy = 0;
+    }
+    
   }
   setState(state){
     this.currentState = this.states[state];
     this.currentState.enter();
+  }
+  onGround(){
+    return this.y >= this.gameHeight - this.height;
   }
 }
